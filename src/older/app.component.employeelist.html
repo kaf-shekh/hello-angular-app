@@ -1,0 +1,53 @@
+<div class="panel">  
+    <h3>HTTP Module Sample - Add and Fetch Data</h3>  
+    <div class="panel-body container-fluid" *ngIf="showDetails">  
+      <div class="row row-lg">  
+        <table class="table" style="width:100%;">  
+          <thead>  
+            <tr>  
+              <th class="cell-100">Srl No</th>  
+              <th class="cell-300">Alias</th>  
+              <th class="cell-300">Employee Name</th>  
+              <th class="cell-300">Date of Birth</th>  
+              <th class="cell-300">Join Date</th>  
+              <th class="cell-300">Department</th>  
+              <th class="cell-300">Designation</th>  
+              <th class="cell-300">Salary</th>  
+              <th class="cell-180"></th>  
+            </tr>  
+          </thead>  
+          <tbody>  
+            <tr *ngFor="let item of data">  
+              <td class="cell-100">{{item.Id}}</td>  
+              <td class="cell-300">{{item.Code}}</td>  
+              <td class="cell-300">{{item.Name}}</td>  
+              <td class="cell-300">{{item.DOB | date :'shortDate'}}</td>  
+              <td class="cell-300">{{item.DOJ | date :'mediumDate'}}</td>  
+              <td class="cell-300">{{item.Department}}</td>  
+              <td class="cell-300">{{item.Designation}}</td>  
+              <td class="cell-300">{{item.Salary |currency:'INR':true}}</td>  
+              <td class="cell-180">  
+                <a (click)="onUpdateData(item);" style="cursor:pointer;">  
+                  <span class="badge badge-primary">Edit</span>  
+                </a>      
+                <a (click)="onDeleteData(item);" style="cursor:pointer;">  
+                  <span class="badge badge-danger">Delete</span>  
+                </a>  
+              </td>  
+            </tr>  
+          </tbody>  
+        </table>  
+        <p>  
+          <button class="btn btn-primary" (click)="addEmployee()">  
+            Add Employee  
+          </button>  
+        </p>  
+      </div>  
+    </div>  
+    <div  class="panel-body container-fluid" *ngIf="showEmployee">  
+      <employee-add (onHide)="onHide($event);"></employee-add>  
+    </div>  
+    <div  class="panel-body container-fluid" *ngIf="editEmployee">  
+      <employee-update [source]="_selectedData" (onHide)="onHide($event);"></employee-update>  
+    </div>  
+  </div>  
